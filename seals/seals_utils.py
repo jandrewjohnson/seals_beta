@@ -803,7 +803,7 @@ def download_google_cloud_blob(bucket_name, source_blob_name, credentials_path, 
     
     print("""DEPRECATED FOR HB VERSION. Downloads a blob from the bucket.""")
     
-    raise
+    # raise
     require_database = True
     if hb.path_exists(credentials_path) and require_database:
         client = storage.Client.from_service_account_json(credentials_path)

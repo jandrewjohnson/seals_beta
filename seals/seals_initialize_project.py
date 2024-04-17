@@ -1,6 +1,11 @@
 # initialize_project defines the run() command for the whole project, which takes the project object as its only function.
 
-import os
+import hazelbean as hb
+# conda_envs_with_cython = hb.check_which_conda_envs_have_library_installed('cython')
+# print(conda_envs_with_cython)
+
+
+import os, sys
 import hazelbean as hb
 from hazelbean import cloud_utils
 
@@ -196,20 +201,10 @@ def run(p):
     # or something simmilar.
     # Note that to actually do the recompilation of the C code, you will need to follow the instructions from the following error message 
     # error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
-    env_name = 'env2023a'
-    import seals_utils
-    if env_name is not None:
-        try:
-            seals_utils.recompile_cython(env_name)
-        except:
-            print('Could not recompile cython. This is not a problem if you are not using cython. If you are, you will need to recompile manually.')
-
-    import seals_cython_functions as seals_cython_functions
-    from seals_cython_functions import calibrate as calibrate
-
-    from seals_cython_functions import calibrate_from_change_matrix
-
-
+    
+    # Get the name of the current environment
+    
+    
     p.execute()
 
 

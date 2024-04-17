@@ -46,8 +46,30 @@ except ImportError:
 L = hb.get_logger()
 
 
-import seals_cython_functions as seals_cython_functions
-from seals_cython_functions import calibrate as calibrate
+env_name = sys.executable.split(os.sep)[-2]
+
+import seals_utils
+if env_name is not None:
+    try:
+        seals_utils.recompile_cython(env_name)
+    except:
+        raise NameError('Failed to compile cython. Most likely this is because you have not set the p.conda_env_name above to the name of your a properly configured environment with Cython installed. The other reason it might fail is if you do not have a C compiler installed.  To fix this, search for ')
+
+try:
+    from seals_cython_functions import calibrate as calibrate
+except:
+    raise NameError('Failed to import a cython-enabled library. Most likely this is because you have not set the p.conda_env_name above to the name of your a properly configured environment with Cython installed. The other reason it might fail is if you do not have a C compiler installed.  To fix this, search for ')
+
+try:
+    import seals_cython_functions as seals_cython_functions
+except:
+    raise NameError('Failed to import a cython-enabled library. Most likely this is because you have not set the p.conda_env_name above to the name of your a properly configured environment with Cython installed. The other reason it might fail is if you do not have a C compiler installed.  To fix this, search for ')
+
+try:
+    from seals_cython_functions import calibrate_from_change_matrix
+except:
+    raise NameError('Failed to import a cython-enabled library. Most likely this is because you have not set the p.conda_env_name above to the name of your a properly configured environment with Cython installed. The other reason it might fail is if you do not have a C compiler installed.  To fix this, search for ')
+
 
 def initialize_tasks(p):
     # how do tasks? Do this vs.
